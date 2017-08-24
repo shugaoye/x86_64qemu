@@ -30,19 +30,8 @@ PRODUCT_COPY_FILES += \
     device/generic/x86_64qemu/recovery/root/sbin/network_start.sh:recovery/root/sbin/network_start.sh \
     device/generic/x86_64qemu/recovery/root/sbin/init.x86_64qemu.sh:recovery/root/sbin/init.x86_64qemu.sh \
     device/generic/x86_64qemu/recovery/root/sbin/create_partitions.sh:recovery/root/sbin/create_partitions.sh \
-    device/generic/x86_64qemu/recovery/root/sbin/mount.vboxsf:recovery/root/sbin/mount.vboxsf \
     device/generic/x86_64qemu/recovery/root/sbin/gdbserver:recovery/root/sbin/gdbserver \
     device/generic/x86_64qemu/recovery/root/sbin/parted:recovery/root/sbin/parted \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/atkbd.ko:recovery/root/x86_64qemu/atkbd.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/cn.ko:recovery/root/x86_64qemu/cn.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/uvesafb.ko:recovery/root/x86_64qemu/uvesafb.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/drm.ko:recovery/root/x86_64qemu/drm.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/ttm.ko:recovery/root/x86_64qemu/ttm.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/drm_kms_helper.ko:recovery/root/x86_64qemu/drm_kms_helper.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/fb_sys_fops.ko:recovery/root/x86_64qemu/fb_sys_fops.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/sysimgblt.ko:recovery/root/x86_64qemu/sysimgblt.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/sysfillrect.ko:recovery/root/x86_64qemu/sysfillrect.ko \
-    device/generic/x86_64qemu/recovery/root/x86_64qemu/syscopyarea.ko:recovery/root/x86_64qemu/syscopyarea.ko \
     device/generic/x86_64qemu/recovery/root/lib/libc.so.6:recovery/root/lib/libc.so.6 \
     device/generic/x86_64qemu/recovery/root/lib/libcrypt.so.1:recovery/root/lib/libcrypt.so.1 \
     device/generic/x86_64qemu/recovery/root/lib/libdl.so.2:recovery/root/lib/libdl.so.2 \
@@ -62,4 +51,15 @@ PRODUCT_COPY_FILES += \
     device/generic/x86_64qemu/recovery/root/system/lib/libpcre.so:recovery/root/system/lib/libpcre.so \
     device/generic/x86_64qemu/recovery/root/system/lib/libselinux.so:recovery/root/system/lib/libselinux.so \
     device/generic/x86_64qemu/recovery/root/system/lib/libext2_uuid.so:recovery/root/system/lib/libext2_uuid.so
+
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/atkbd.ko:recovery/root/x86_64qemu/atkbd.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/cn.ko:recovery/root/x86_64qemu/cn.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/uvesafb.ko:recovery/root/x86_64qemu/uvesafb.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/drm.ko:recovery/root/x86_64qemu/drm.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/ttm.ko:recovery/root/x86_64qemu/ttm.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/drm_kms_helper.ko:recovery/root/x86_64qemu/drm_kms_helper.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/fb_sys_fops.ko:recovery/root/x86_64qemu/fb_sys_fops.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/sysimgblt.ko:recovery/root/x86_64qemu/sysimgblt.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/sysfillrect.ko:recovery/root/x86_64qemu/sysfillrect.ko \
+#    device/generic/x86_64qemu/recovery/root/x86_64qemu/syscopyarea.ko:recovery/root/x86_64qemu/syscopyarea.ko \
 

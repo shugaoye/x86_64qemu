@@ -20,6 +20,6 @@
 # In particular, you can add lunch options with the add_lunch_combo
 # function: add_lunch_combo x86qemu-eng
 
-add_lunch_combo x86qemu-eng
-add_lunch_combo x86qemu-userdebug
-add_lunch_combo x86qemu-user
+add_lunch_combo x86_64qemu-eng
+add_lunch_combo x86_64qemu-userdebug
+add_lunch_combo x86_64qemu-user

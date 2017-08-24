@@ -71,10 +71,10 @@ X86QEMU_RECOVERY := true
 #
 
 # device-specific extensions to the recovery UI
-TARGET_RECOVERY_UI_LIB := librecovery_ui_x86qemu
+TARGET_RECOVERY_UI_LIB := librecovery_ui_x86_64qemu
 
 # add device-specific extensions to the updater binary
-TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_x86qemu
+TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_x86_64qemu
 # TARGET_RECOVERY_UPDATER_EXTRA_LIBS +=
 
 ADD_RADIO_FILES := true

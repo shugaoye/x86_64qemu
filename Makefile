@@ -38,11 +38,11 @@ updater:
 	cd ../../..;make updater
 	cp $OUT/system/bin/updater ~/temp/sbin
 
-librecovery_ui_x86qemu:
-	cd ../../..;make librecovery_ui_x86qemu
+librecovery_ui_x86_64qemu:
+	cd ../../..;make librecovery_ui_x86_64qemu
 
-librecovery_updater_x86qemu:
-	cd ../../..;make librecovery_updater_x86qemu
+librecovery_updater_x86_64qemu:
+	cd ../../..;make librecovery_updater_x86_64qemu
 
 snod:
 	cd ../../..;make snod

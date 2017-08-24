@@ -30,7 +30,7 @@ Value* ReprogramX86vboxFn(const char* name, State* state, int argc, Expr* argv[]
   bool success = false;
 
   if (argc != 2) {
-    return ErrorAbort(state, kArgsParsingFailure, "%s() expects 2 args, got %d", name, argc);
+    return ErrorAbort(state, "%s() expects 2 args, got %d", name, argc);
   }
 
   char* zip_path;

@@ -1,0 +1,10 @@
+# x86qemu
+# none			/cache		tmpfs	nosuid,nodev,noatime	defaults
+
+# If the kernel parameter DATA is defined, we don't need to mount data partition.
+/dev/block/sda3    /sdcard  vfat    defaults      voldmanaged=sdcard:auto
+/dev/block/sda5	   /cache  	ext4	noatime,nosuid,nodev,nomblk_io_submit,errors=panic   wait
+
+/devices/*/usb*/*		auto	auto	defaults		voldmanaged=usb:auto,encryptable=userdata
+/devices/*/*sdmmc*/*		auto	auto	defaults		voldmanaged=sdcard1:auto,encryptable=userdata
+/devices/*/80860F14:01/mmc_*	auto	auto	defaults		voldmanaged=sdcard1:auto,encryptable=userdata

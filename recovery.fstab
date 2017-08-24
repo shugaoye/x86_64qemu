@@ -1,0 +1,13 @@
+# Android fstab file.
+#<src>    <mnt_point>    <type>    <mnt_flags and options>    <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+/dev/block/sda1      /system       ext4      rw                                                    wait
+/dev/block/sda2      /data         ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
+/dev/block/sda3      /sdcard       vfat      defaults      voldmanaged=sdcard:auto
+/dev/block/sda5      /cache        ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
+/dev/block/sda6      /misc         emmc      defaults    defaults
+/dev/block/sda7      /recovery     emmc      defaults    defaults
+/dev/block/sda8      /boot         emmc      defaults    defaults
+

@@ -1,0 +1,25 @@
+on early-init
+    # for /bin/busybox
+    symlink /bin/ld-linux.so.2 /lib/ld-linux.so.2
+    symlink /bin/busybox /bin/sh
+    symlink /bin/busybox /sbin/sh
+
+on init
+    mkdir /vendor
+    exec -- /bin/sh /sbin/init.x86vbox.sh
+
+service network_start /sbin/network_start.sh
+    user root
+    seclabel u:r:recovery:s0
+    oneshot
+
+service console /bin/sh
+    class core
+    console
+#    disabled
+#    user shell
+    group shell log
+    seclabel u:r:shell:s0
+
+on property:ro.debuggable=1
+    start console

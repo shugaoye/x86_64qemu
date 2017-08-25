@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * recovery_x86vbox.cpp - Extend recovery for x86vbox
+ * recovery_updater.cpp - Extend recovery for x86qemu
  *
  * Copyright (c) 2017 Roger Ye.  All rights reserved.
  * Software License Agreement
@@ -24,9 +24,11 @@
 #include "minzip/Zip.h"
 #include "minzip/SysUtil.h"
 
+extern "C" {
+
 extern struct selabel_handle *sehandle;
 
-Value* ReprogramX86vboxFn(const char* name, State* state, int argc, Expr* argv[]) {
+Value* ReprogramX86qemuFn(const char* name, State* state, int argc, Expr* argv[]) {
   bool success = false;
 
   if (argc != 2) {
@@ -64,7 +66,7 @@ Value* ReprogramX86vboxFn(const char* name, State* state, int argc, Expr* argv[]
       return NULL;
   }
 
-  success = mzExtractRecursive(&za, "android-x86vbox", dest_path,
+  success = mzExtractRecursive(&za, "android-x86qemu", dest_path,
                                     &timestamp,
                                     NULL, NULL, sehandle);
   /* End to extract files. */
@@ -77,6 +79,8 @@ Value* ReprogramX86vboxFn(const char* name, State* state, int argc, Expr* argv[]
   return StringValue(strdup(success ? "t" : ""));
 }
 
-void Register_librecovery_updater_x86vbox() {
-  RegisterFunction("x86vbox.reprogram", ReprogramX86vboxFn);
+void Register_librecovery_updater_x86_64qemu() {
+  RegisterFunction("x86qemu.reprogram", ReprogramX86qemuFn);
+}
+
 }

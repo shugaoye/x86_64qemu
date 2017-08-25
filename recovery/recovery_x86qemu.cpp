@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * recovery_x86vbox.cpp - Extend recovery for x86vbox
+ * recovery_x86qemu.cpp - Extend recovery for x86qemu
  *
  * Copyright (c) 2017 Roger Ye.  All rights reserved.
  * Software License Agreement
@@ -27,7 +27,7 @@
 // defined in "roots.h"
 int unmount_format_volumes(int format);
 
-class X86vboxUI : public ScreenRecoveryUI {
+class X86qemuUI : public ScreenRecoveryUI {
 public:
     virtual KeyAction CheckKey(int key) {
       if (key == KEY_HOME) {
@@ -37,16 +37,16 @@ public:
     }
 };
 
-class X86vboxDevice : public Device {
+class X86qemuDevice : public Device {
 private:
-	X86vboxUI* ui_;
+	X86qemuUI* ui_;
 
 public:
-    X86vboxDevice(X86vboxUI* ui) : Device(ui), ui_(ui)  { }
+    X86qemuDevice(X86qemuUI* ui) : Device(ui), ui_(ui)  { }
 
     virtual const char* const* GetMenuItems();
     virtual BuiltinAction InvokeMenuItem(int menu_position);
-    X86vboxUI* GetUI() { return ui_; }
+    X86qemuUI* GetUI() { return ui_; }
     int CreatePartitions();
 };
 
@@ -64,13 +64,13 @@ static const char* MENU_ITEMS[] = {
     NULL
 };
 
-const char* const* X86vboxDevice::GetMenuItems() {
+const char* const* X86qemuDevice::GetMenuItems() {
   return MENU_ITEMS;
 }
 
-static const char *X86VBOX_PARTITION_SCRIPT = "/sbin/create_partitions.sh";
-static char* const x86vbox_argv[] = {"create_partitions.sh", NULL};
-int X86vboxDevice::CreatePartitions() {
+static const char *X86QEMU_PARTITION_SCRIPT = "/sbin/create_partitions.sh";
+static char* const x86qemu_argv[] = {"create_partitions.sh", NULL};
+int X86qemuDevice::CreatePartitions() {
     int status;
     pid_t child;
 
@@ -81,7 +81,7 @@ int X86vboxDevice::CreatePartitions() {
     }
 
     if ((child = vfork()) == 0) {
-        execv(X86VBOX_PARTITION_SCRIPT, x86vbox_argv);
+        execv(X86QEMU_PARTITION_SCRIPT, x86qemu_argv);
 
         status = unmount_format_volumes(1);
         if (status != 0) {
@@ -92,12 +92,12 @@ int X86vboxDevice::CreatePartitions() {
     }
     waitpid(child, &status, 0);
     if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
-        LOGE("%s failed with status %d\n", X86VBOX_PARTITION_SCRIPT, WEXITSTATUS(status));
+        LOGE("%s failed with status %d\n", X86QEMU_PARTITION_SCRIPT, WEXITSTATUS(status));
     }
     return WEXITSTATUS(status);
 }
 
-Device::BuiltinAction X86vboxDevice::InvokeMenuItem(int menu_position) {
+Device::BuiltinAction X86qemuDevice::InvokeMenuItem(int menu_position) {
   switch (menu_position) {
     case 0: return REBOOT;
     case 1: return REBOOT_BOOTLOADER;
@@ -117,5 +117,5 @@ Device::BuiltinAction X86vboxDevice::InvokeMenuItem(int menu_position) {
 }
 
 Device* make_device() {
-  return new X86vboxDevice(new X86vboxUI);
+  return new X86qemuDevice(new X86qemuUI);
 }

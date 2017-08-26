@@ -29,7 +29,7 @@ MKBOOTFS := mkbootfs
 X86QEMU_BOOT_IMAGES_DIR := images/android-x86qemu
 
 all:
-	cd ../../..;make -j4 2>&1 | tee x86qemu-`date +%Y%m%d`.txt
+	cd ../../..;make -j4 2>&1 | tee x86_64qemu-`date +%Y%m%d`.txt
 
 x86qemu:
 	cd ../../..;make -j4
@@ -73,6 +73,11 @@ clean-recoveryimage:
 	rm ${OUT}/recovery.img
 	rm -rf ${OUT}/recovery/root
 	rm ${OUT}/ramdisk-recovery.img
+
+qcow2:
+	qemu-img convert -c -f raw -O qcow2 $(OUT)/system.img $(OUT)/system.img.qcow2
+	qemu-img convert -c -f raw -O qcow2 $(OUT)/userdata.img $(OUT)/userdata.img.qcow2
+	qemu-img convert -c -f raw -O qcow2 $(OUT)/cache.img $(OUT)/cache.img.qcow2
 	
 dist:
 	if [ -d "images" ]; then \

@@ -6,7 +6,10 @@ on early-init
 
 on init
     mkdir /vendor
-    exec -- /bin/sh /sbin/init.x86vbox.sh
+    exec -- /bin/sh /sbin/init.x86_64qemu.sh
+
+on fs
+    mount_all /fstab.${ro.hardware}
 
 service network_start /sbin/network_start.sh
     user root

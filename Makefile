@@ -26,26 +26,33 @@ initrd_dir :=  ${OUT}/../../../../bootable/newinstaller/initrd
 TARGET_INSTALLER_OUT :=${OUT}/installer
 ACP := acp
 MKBOOTFS := mkbootfs
-X86QEMU_BOOT_IMAGES_DIR := images/android-x86qemu
+PRODUCT_NAME := x86_64qemu
+ANDROID_X86_NAME := android-${PRODUCT_NAME}
+X86QEMU_BOOT_IMAGES_DIR := images/android-${PRODUCT_NAME}
 
 all:
-	cd ../../..;make -j4 2>&1 | tee x86_64qemu-`date +%Y%m%d`.txt
+	cd ../../..;make -j4 2>&1 | tee ${PRODUCT_NAME}-`date +%Y%m%d`.txt
 
-x86qemu:
+${PRODUCT_NAME}:
 	cd ../../..;make -j4
 
 updater:
 	cd ../../..;make updater
 	cp $OUT/system/bin/updater ~/temp/sbin
 
-librecovery_ui_x86_64qemu:
-	cd ../../..;make librecovery_ui_x86_64qemu
+librecovery_ui_${PRODUCT_NAME}:
+	cd ../../..;make librecovery_ui_${PRODUCT_NAME}
 
-librecovery_updater_x86_64qemu:
-	cd ../../..;make librecovery_updater_x86_64qemu
+librecovery_updater_${PRODUCT_NAME}:
+	cd ../../..;make librecovery_updater_${PRODUCT_NAME}
 
 snod:
+	[ -d ${OUT}/system/${ANDROID_X86_NAME} ] && echo "Found android-${PRODUCT_NAME}" || mkdir -p ${OUT}/system/${ANDROID_X86_NAME}
+	cp ${OUT}/ramdisk.img ${OUT}/system/${ANDROID_X86_NAME}/ramdisk.img
 	cd ../../..;make snod
+	qemu-img convert -c -f raw -O qcow2 $(OUT)/system.img $(OUT)/system.img.qcow2
+	qemu-img convert -c -f raw -O qcow2 $(OUT)/userdata.img $(OUT)/userdata.img.qcow2
+	qemu-img convert -c -f raw -O qcow2 $(OUT)/cache.img $(OUT)/cache.img.qcow2
 
 initrd_img:
 	cd ../../..;make initrd USE_SQUASHFS=0
@@ -67,7 +74,7 @@ ramdisk-recovery:
 	cd ../../..;$(MKBOOTFS) -d ${OUT}/system ${OUT}/recovery/root | minigzip > ${OUT}/ramdisk-recovery.img
 
 recoveryimage:
-	cd ../../..;make -j4 recoveryimage 2>&1 | tee x86qemu-`date +%Y%m%d`.txt
+	cd ../../..;make -j4 recoveryimage 2>&1 | tee ${PRODUCT_NAME}-`date +%Y%m%d`.txt
 
 clean-recoveryimage:
 	rm ${OUT}/recovery.img
@@ -88,6 +95,6 @@ dist:
 	cp ${OUT}/ramdisk.img ${X86QEMU_BOOT_IMAGES_DIR}
 	cp ${OUT}/ramdisk-recovery.img ${X86QEMU_BOOT_IMAGES_DIR}
 	cp ${OUT}/kernel ${X86QEMU_BOOT_IMAGES_DIR}
-	cd images; zip x86qemu.dat android-x86qemu/*
+	cd images; zip x86qemu.dat ${ANDROID_X86_NAME}/*
 	cd ../../..;mkdir -p dist_output
-	cd ../../..;make dist DIST_DIR=dist_output 2>&1 | tee x86qemu-`date +%Y%m%d`.txt
+	cd ../../..;make dist DIST_DIR=dist_output 2>&1 | tee ${PRODUCT_NAME}-`date +%Y%m%d`.txt

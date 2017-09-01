@@ -7,6 +7,6 @@
 /devices/*/*sdmmc*/*		auto	auto	defaults		voldmanaged=sdcard1:auto,encryptable=userdata
 /devices/*/80860F14:01/mmc_*	auto	auto	defaults		voldmanaged=sdcard1:auto,encryptable=userdata
 
-/dev/block/vda    /system             ext4      ro                                                    wait
+# /dev/block/vda    /system             ext4      ro                                                    wait
 /dev/block/vdb    /cache              ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
-/dev/block/vdc    /data               ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
+# /dev/block/vdc    /data               ext4      noatime,nosuid,nodev,nomblk_io_submit,errors=panic    wait
